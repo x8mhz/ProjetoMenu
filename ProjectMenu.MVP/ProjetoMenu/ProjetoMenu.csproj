@@ -41,11 +41,21 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,31 +73,41 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803251729441_Initial.cs" />
-    <Compile Include="Migrations\201803251729441_Initial.Designer.cs">
-      <DependentUpon>201803251729441_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201803271525019_Initial.cs" />
+    <Compile Include="Migrations\201803271525019_Initial.Designer.cs">
+      <DependentUpon>201803271525019_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Data\Context\ProjetoMenuContext.cs" />
-    <Compile Include="Model\Data\EntityConfig\ProdutoMap.cs" />
-    <Compile Include="Model\Entities\Produto.cs" />
-    <Compile Include="Model\Repositories\Interfaces\IProdutoRepository.cs" />
-    <Compile Include="Model\Repositories\ProdutoRepository.cs" />
-    <Compile Include="Presenter\ProdutoPresenter.cs" />
+    <Compile Include="Model\Data\Context\ProjectMenuContext.cs" />
+    <Compile Include="Model\Data\EntityConfig\ProductMap.cs" />
+    <Compile Include="Model\Entities\Product.cs" />
+    <Compile Include="Model\Repositories\Interfaces\IProductRepository.cs" />
+    <Compile Include="Model\Repositories\Interfaces\IRepositoryBase.cs" />
+    <Compile Include="Model\Repositories\ProductRepository.cs" />
+    <Compile Include="Model\Repositories\RepositoryBase.cs" />
+    <Compile Include="Presenter\AddProductPresenter.cs" />
+    <Compile Include="Presenter\ShowProductPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Interfaces\IProdutoView.cs" />
-    <Compile Include="View\UserControls\UcAdicionarProduto.cs">
+    <Compile Include="View\Interfaces\IAddProductView.cs" />
+    <Compile Include="View\Interfaces\IShowProductView.cs" />
+    <Compile Include="View\UserControls\UcAddProduct.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControls\UcAdicionarProduto.Designer.cs">
-      <DependentUpon>UcAdicionarProduto.cs</DependentUpon>
+    <Compile Include="View\UserControls\UcAddProduct.Designer.cs">
+      <DependentUpon>UcAddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UcShowProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UserControls\UcShowProduct.Designer.cs">
+      <DependentUpon>UcShowProduct.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803251729441_Initial.resx">
-      <DependentUpon>201803251729441_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803271525019_Initial.resx">
+      <DependentUpon>201803271525019_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,10 +118,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\UserControls\UcAdicionarProduto.resx">
-      <DependentUpon>UcAdicionarProduto.cs</DependentUpon>
+    <EmbeddedResource Include="View\UserControls\UcAddProduct.resx">
+      <DependentUpon>UcAddProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserControls\UcShowProduct.resx">
+      <DependentUpon>UcShowProduct.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ProjetoMenu.Model.Data.Context.ProjetoMenuContext.datasource" />
+    <None Include="Properties\DataSources\ProjetoMenu.Model.Entities.Product.datasource" />
+    <None Include="Properties\DataSources\ProjetoMenu.Model.Entities.Produto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,6 +141,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

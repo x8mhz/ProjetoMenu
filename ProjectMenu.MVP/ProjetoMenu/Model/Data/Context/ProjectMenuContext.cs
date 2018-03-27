@@ -6,21 +6,24 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ProjetoMenu.Model.Data.Context
 {
-    public class ProjetoMenuContext : DbContext
+    public class ProjectMenuContext : DbContext
     {
-        public ProjetoMenuContext() : base ("Context")
+        public ProjectMenuContext() : base ("Context")
         {
 
         }
 
-        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Configurations.Add(new ProdutoMap());
- 
+            modelBuilder.Properties<string>()
+                .Configure(p => p.HasColumnType("varchar")
+                .HasMaxLength(100));
+
+            modelBuilder.Configurations.Add(new ProductMap()); 
         }
     }
 }
